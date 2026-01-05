@@ -1,6 +1,8 @@
 """
-请求限流中间件
+中间件模块
 """
+from .performance import PerformanceMiddleware
+
 import time
 from collections import defaultdict
 from fastapi import Request, HTTPException
