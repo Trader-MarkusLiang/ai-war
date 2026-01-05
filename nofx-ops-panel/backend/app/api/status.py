@@ -1,12 +1,18 @@
 from fastapi import APIRouter, Depends
 from ..auth import verify_token
 from ..services import ssh_executor
+from ..cache import cache
 
 router = APIRouter(prefix="/status", tags=["状态"])
 
 @router.get("")
 async def get_status(_: dict = Depends(verify_token)):
-    """获取服务器状态"""
+    """获取服务器状态（带缓存）"""
+    # 检查缓存
+    cache_key = "server_status"
+    cached_data = cache.get(cache_key)
+    if cached_data:
+        return cached_data
     combined_cmd = 'echo "===CONTAINERS===" && docker ps --format "{{.Names}}|{{.Status}}|{{.Ports}}" 2>/dev/null && echo "===STATS===" && docker stats --no-stream --format "{{.Name}}|{{.MemUsage}}|{{.CPUPerc}}" 2>/dev/null && echo "===SYSTEM===" && free -h | grep Mem | awk \'{print $2,$3}\' && df -h / | tail -1 | awk \'{print $2,$3,$5}\' && echo "===SERVER===" && hostname && cat /etc/os-release | grep PRETTY_NAME | cut -d\'"\' -f2 && uptime -p'
     stdout, stderr, code = await ssh_executor.execute_async(combined_cmd)
     print(f"SSH stdout: {stdout[:500] if stdout else 'empty'}")
@@ -69,4 +75,9 @@ async def get_status(_: dict = Depends(verify_token)):
         if c["name"] in stats:
             c.update(stats[c["name"]])
 
-    return {"containers": containers, "system": system, "server": server}
+    result = {"containers": containers, "system": system, "server": server}
+
+    # 缓存结果（5秒）
+    cache.set(cache_key, result, ttl=5)
+
+    return result
