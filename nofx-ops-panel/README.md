@@ -1,6 +1,15 @@
 # NOFX 运维管理面板
 
+[![Version](https://img.shields.io/badge/version-1.3.0-blue.svg)](https://github.com/Trader-MarkusLiang/ai-war)
+[![Status](https://img.shields.io/badge/status-production--ready-green.svg)](https://github.com/Trader-MarkusLiang/ai-war)
+
 一个基于 FastAPI + Vue 3 的轻量级运维管理面板，用于远程管理 NOFX 交易系统。
+
+**📖 文档导航**
+- [快速开始](./QUICKSTART.md) - 5分钟快速部署
+- [优化详情](./OPTIMIZATION.md) - 性能优化说明
+- [贡献指南](./CONTRIBUTING.md) - 如何参与贡献
+- [版本历史](./CHANGELOG.md) - 更新日志
 
 ## ✨ 特性
 
