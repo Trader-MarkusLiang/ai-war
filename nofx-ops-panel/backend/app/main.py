@@ -1,21 +1,30 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+import logging
 from .auth import verify_password, create_access_token
 from .api import (
     status_router, service_router, logs_router,
     diagnose_router, backup_router, config_router, tunnel_router, disk_router,
     settings_router, image_history_router
 )
+from . import config
+
+# 配置日志
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 app = FastAPI(title="NOFX运维管理面板", version="1.0.0")
 
-# CORS配置
+# CORS配置（优化：从配置文件读取）
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=config.ALLOWED_ORIGINS,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"],
 )
 
