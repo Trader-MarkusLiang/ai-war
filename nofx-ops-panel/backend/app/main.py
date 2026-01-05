@@ -26,7 +26,13 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="NOFX运维管理面板", version="1.3.0")
+app = FastAPI(
+    title="NOFX运维管理面板",
+    version="1.3.0",
+    description="基于 FastAPI + Vue 3 的轻量级运维管理面板",
+    docs_url="/docs",
+    redoc_url="/redoc"
+)
 
 # 注册异常处理器
 app.add_exception_handler(StarletteHTTPException, http_exception_handler)
