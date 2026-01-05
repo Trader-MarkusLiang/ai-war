@@ -1,8 +1,9 @@
 import axios from 'axios'
+import { setLoading, setError } from '../stores/global'
 
 const api = axios.create({
   baseURL: '/api',
-  timeout: 30000, // 30秒超时
+  timeout: 30000,
   headers: {
     'Content-Type': 'application/json'
   }
@@ -11,6 +12,7 @@ const api = axios.create({
 // 请求拦截器
 api.interceptors.request.use(
   config => {
+    setLoading(true)
     const token = localStorage.getItem('token')
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
@@ -18,30 +20,34 @@ api.interceptors.request.use(
     return config
   },
   error => {
-    console.error('请求错误:', error)
+    setLoading(false)
+    setError('请求失败')
     return Promise.reject(error)
   }
 )
 
-// 响应拦截器（优化错误处理）
+// 响应拦截器
 api.interceptors.response.use(
-  res => res.data,
+  res => {
+    setLoading(false)
+    return res.data
+  },
   err => {
+    setLoading(false)
     const status = err.response?.status
-    const message = err.response?.data?.detail || err.message
+    const message = err.response?.data?.error?.message || err.message
 
-    // 处理不同的错误状态
     if (status === 401) {
       localStorage.removeItem('token')
       window.location.href = '/login'
-    } else if (status === 403) {
-      console.error('权限不足')
-    } else if (status === 404) {
-      console.error('资源不存在')
+    } else if (status === 429) {
+      setError('请求过于频繁，请稍后再试')
     } else if (status >= 500) {
-      console.error('服务器错误:', message)
+      setError('服务器错误: ' + message)
     } else if (err.code === 'ECONNABORTED') {
-      console.error('请求超时')
+      setError('请求超时')
+    } else {
+      setError(message || '请求失败')
     }
 
     return Promise.reject(err)

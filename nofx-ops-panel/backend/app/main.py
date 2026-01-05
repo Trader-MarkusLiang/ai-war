@@ -18,14 +18,15 @@ from .exceptions import (
     general_exception_handler
 )
 
-# 配置日志
+# 配置日志（改进格式）
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format='%(asctime)s | %(levelname)-8s | %(name)s | %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
 )
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="NOFX运维管理面板", version="1.0.0")
+app = FastAPI(title="NOFX运维管理面板", version="1.3.0")
 
 # 注册异常处理器
 app.add_exception_handler(StarletteHTTPException, http_exception_handler)
