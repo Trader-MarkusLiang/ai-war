@@ -1,0 +1,30 @@
+def get():
+    # Example of calling a GET request
+    request_path = "/capi/v2/account/position/singlePosition"
+    query_string = '?symbol=cmt_btcusdt'
+    response = send_request_get(api_key, secret_key, access_passphrase, method="GET", request_path, query_string)
+    print(response.status_code)
+    print(response.text)
+
+def post():# 1usage
+    # Example of calling a POST request
+    request_path = "/capi/v2/order/placeOrder"
+    body = {
+        "symbol": "cmt_btcusdt",
+        "client_oid": "111111111222222",
+        "size": "1",
+        "type": "1",
+        "order_type": "0",
+        "match_price": "0",
+        "price": "100",
+        "presetTakeProfitPrice": "105",
+        "presetStopLossPrice": "95"
+    }
+    query_string = ""
+    response = send_request_post(api_key, secret_key, access_passphrase, method="POST", request_path, query_string, body)
+    print(response.status_code)
+    print(response.text)
+
+if __name__ == '__main__':
+    #get()
+    post()

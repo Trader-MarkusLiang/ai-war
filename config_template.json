@@ -1,0 +1,108 @@
+{
+  "traders": [
+    {
+      "id": "aster_trader",
+      "name": "Aster Trader",
+      "enabled": true,
+      "ai_model": "openai",
+      "exchange": "aster",
+
+      "aster_user": "你的主钱包地址",
+      "aster_signer": "你的API钱包地址",
+      "aster_private_key": "你的私钥（去掉0x前缀）",
+
+      "openai_key": "你的OpenAI密钥",
+      "openai_base_url": "https://code.newcli.com/codex/v1",
+      "openai_model": "gpt-5.1-codex-max",
+
+      "initial_balance": 1000,
+      "scan_interval_minutes": 60
+    }
+  ],
+
+  "use_default_coins": true,
+  "default_coins": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "BNBUSDT"
+  ],
+
+  "coin_pool_api_enabled": false,
+  "oi_top_api_enabled": false,
+  "max_candidates": 5,
+
+  "api_server_port": 8080,
+  "max_daily_loss": 10,
+  "max_drawdown": 20,
+  "stop_trading_minutes": 30,
+
+  "leverage": {
+    "btc_eth_leverage": 5,
+    "altcoin_leverage": 5
+  },
+
+  "risk_control": {
+    "max_open_orders_per_cycle": 1,
+    "max_total_open_positions": 2,
+    "single_position_pct_cap": 0.15,
+    "total_position_pct_cap": 0.25,
+    "initial_position_pct_sugg": 0.1,
+    "position_tolerance_pct": 0.01,
+    "min_risk_reward_ratio": 3,
+    "cooldown_cycles": 2,
+    "candidate_min_confidence": 80,
+    "max_single_direction_positions": 2,
+    "max_margin_used_pct": 0.4,
+    "cooldown_drawdown_cycles": 6
+  },
+
+  "knowledge_base": {
+    "enabled": true,
+    "use_enhanced_learning": true,
+    "fallback_to_legacy": true,
+    "inject_experience": false
+  },
+
+  "email": {
+    "enabled": false
+  },
+
+  "proxy": {
+    "enabled": false,
+    "http_proxy": "",
+    "https_proxy": "",
+    "no_proxy": "localhost,127.0.0.1"
+  },
+
+  "billing": {
+    "enabled": true,
+    "event_dir": "data/billing/events",
+    "report_dir": "data/billing/reports"
+  },
+
+  "features": {
+    "ai_gist": {
+      "enabled": false
+    },
+    "auto_updater": {
+      "enabled": false
+    }
+  },
+
+  "filter": {
+    "enabled": false
+  },
+
+  "long_term": {
+    "enabled": false
+  },
+
+  "auth": {
+    "enabled": true,
+    "jwt_secret": "",
+    "registration_enabled": true,
+    "max_users": 10,
+    "token_expiry_hours": 24
+  }
+}

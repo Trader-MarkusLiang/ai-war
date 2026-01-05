@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  ops-backend:
+    build: ./backend
+    container_name: nofx-ops-backend
+    restart: always
+    network_mode: host
+    volumes:
+      - ~/.ssh:/root/.ssh:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=Asia/Shanghai
+
+  ops-frontend:
+    build: ./frontend
+    container_name: nofx-ops-frontend
+    restart: always
+    network_mode: host
+    depends_on:
+      - ops-backend
+    environment:
+      - TZ=Asia/Shanghai
+
+networks:
+  ops-network:
+    driver: bridge

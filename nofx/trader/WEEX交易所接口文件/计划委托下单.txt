@@ -1,0 +1,42 @@
+计划委托下单
+POST /capi/v2/order/plan_order
+权重(IP): 2, 权重(UID): 5
+
+请求参数
+
+参数名	类型	是否必填	说明
+symbol	String	是	交易对
+client_oid	String	是	自定义订单号(不超过40个字符，且不能是特殊字符，如火星字符等),不可以重复出现在挂单中。如空缺系统会自动赋值
+size	String	是	下单张数（不能为0，不能为负数）
+type	String	是	1:开多 2:开空 3:平多 4:平空
+match_type	String	是	0:限价 1:市价
+execute_price	String	是	执行价格
+trigger_price	String	是	触发价格
+marginMode	Integer	否	保证金模式
+1: 全仓模式
+3: 逐仓模式
+默认值1（全仓模式）
+请求示例
+
+curl -X POST "https://api-contract.weex.com/capi/v2/order/placeOrder" \
+   -H "ACCESS-KEY:*******" \
+   -H "ACCESS-SIGN:*" \
+   -H "ACCESS-PASSPHRASE:*" \
+   -H "ACCESS-TIMESTAMP:1659076670000" \
+   -H "locale:zh-CN" \
+   -H "Content-Type: application/json" \
+   -d '{"symbol": "cmt_bchusdt","client_oid": "11111111111111","size": "1",
+   "type": "1","match_type": "1","execute_price": "100","trigger_price": "100"}'
+
+
+返回参数
+
+参数名	类型	说明
+client_oid		客户端标识
+order_id		计划委托订单号
+返回示例
+
+{
+	"client_oid": null,
+	"order_id": "596480271352594989"
+}

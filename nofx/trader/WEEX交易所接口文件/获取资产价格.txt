@@ -1,0 +1,17 @@
+https://api-contract.weex.com/capi/v2/market/ticker?symbol=cmt_btcusdt
+
+返回数据示例：
+{
+  "base_volume": "140874.7502",
+  "best_ask": "86639.8",
+  "best_bid": "86639.7",
+  "high_24h": "87332.9",
+  "indexPrice": "86681.051",
+  "last": "86639.8",
+  "low_24h": "83786.4",
+  "markPrice": "86639.8",
+  "priceChangePercent": "-0.004735",
+  "symbol": "cmt_btcusdt",
+  "timestamp": "1764642775721",
+  "volume_24h": "12067031451.06358"
+}

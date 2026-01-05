@@ -1,0 +1,35 @@
+计划委托撤单
+POST /capi/v2/order/cancel_plan
+权重(IP): 2, 权重(UID): 3
+
+请求参数
+
+参数名	类型	是否必填	说明
+orderId	String	是	订单号
+请求示例
+
+curl -X POST "https://api-contract.weex.com/capi/v2/order/cancel_plan" \
+   -H "ACCESS-KEY:*******" \
+   -H "ACCESS-SIGN:*" \
+   -H "ACCESS-PASSPHRASE:*" \
+   -H "ACCESS-TIMESTAMP:1659076670000" \
+   -H "locale:zh-CN" \
+   -H "Content-Type: application/json" \
+   -d '{"orderId":"596471064624628269"}'
+
+
+返回参数
+
+参数名	类型	说明
+order_id	String	订单号
+client_oid	String	客户端标识
+result	Boolean	是否撤销成功
+err_msg	string	撤销失败时的原因
+返回示例
+
+{
+	"order_id": "596480271352594989",
+	"client_oid": null,
+	"result": true,
+	"err_msg": null
+}

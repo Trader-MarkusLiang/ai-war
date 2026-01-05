@@ -1,0 +1,44 @@
+下单
+POST /capi/v2/order/placeOrder
+权重(IP): 2, 权重(UID): 5
+
+请求参数
+
+参数名	类型	是否必填	说明
+symbol	String	是	交易对
+client_oid	String	是	自定义订单号（不超过40个字符）
+size	String	是	下单数量（不能为0，不能为负数）
+type	String	是	1:开多 2:开空 3:平多 4:平空
+order_type	String	是	0:普通，1:只做maker；2:全部成交或立即取消；3:立即成交并取消剩余
+match_price	String	是	0:限价，1:市价
+price	String	是	委托价格（限价必填，精度和步长取合约信息接口）
+presetTakeProfitPrice	BigDecimal	否	预设的止盈价格
+presetStopLossPrice	BigDecimal	否	预设的止损价格
+marginMode	Integer	否	保证金模式
+1: 全仓模式
+3: 逐仓模式
+默认值1（全仓模式）
+请求示例
+
+curl -X POST "https://api-contract.weex.com/capi/v2/order/placeOrder" \
+   -H "ACCESS-KEY:*******" \
+   -H "ACCESS-SIGN:*" \
+   -H "ACCESS-PASSPHRASE:*" \
+   -H "ACCESS-TIMESTAMP:1659076670000" \
+   -H "locale:zh-CN" \
+   -H "Content-Type: application/json" \
+   -d '{"symbol": "cmt_bchusdt","client_oid": "111111111222222","size": "1","type": "1","order_type": "0",
+     "match_price": "0","price": "100","presetTakeProfitPrice": "105","presetStopLossPrice": "95"}'
+
+
+返回参数
+
+参数名	类型	说明
+client_oid	string	客户端请求标识
+order_id	string	订单号
+返回示例
+
+{
+	"client_oid": null,
+	"order_id": "596471064624628269"
+}

@@ -1,0 +1,5 @@
+
+字段名	字段值	字段说明
+UNKNOWN_MARGIN_MODE	0	无
+SHARED	1	全仓模式
+ISOLATED	3	逐仓模式

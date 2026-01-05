@@ -1,0 +1,10 @@
+from .status import router as status_router
+from .service import router as service_router
+from .logs import router as logs_router
+from .diagnose import router as diagnose_router
+from .backup import router as backup_router
+from .config_api import router as config_router
+from .tunnel import router as tunnel_router
+from .disk import router as disk_router
+from .settings import router as settings_router
+from .image_history import router as image_history_router

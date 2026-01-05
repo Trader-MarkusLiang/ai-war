@@ -1,0 +1,73 @@
+查询计划历史委托
+GET /capi/v2/order/historyPlan
+权重(IP): 5, 权重(UID): 10
+
+请求参数
+
+参数名	类型	是否必填	说明
+symbol	String	是	交易对
+startTime	Long	否	开始时间
+Unix毫秒时间戳
+endTime	Long	否	结束时间
+Unix毫秒时间戳
+delegateType	Integer	否	委托类型 1开多 2开空 3平多 4平空
+pageSize	Integer	否	每页数据的条数,范围在(1-100),默认100
+请求示例
+
+curl "https://api-contract.weex.com/capi/v2/order/historyPlan?symbol=cmt_bchusdt&delegateType=2&startTime=1742213127794&endTime=1742213506548" \
+   -H "ACCESS-KEY:*******" \
+   -H "ACCESS-SIGN:*******" \
+   -H "ACCESS-PASSPHRASE:*****" \
+   -H "ACCESS-TIMESTAMP:1659076670000" \
+   -H "locale:zh-CN" \
+   -H "Content-Type: application/json"
+
+
+返回参数
+
+参数名	类型	说明
+symbol	String	交易对
+size	String	委托数量
+client_oid	String	客户端标识
+createTime	String	创建时间
+Unix毫秒时间戳
+filled_qty	String	成交数量
+fee	String	手续费
+order_id	String	订单id
+price	String	委托价格
+price_avg	String	成交均价
+status	String	订单状态：-1:撤销成功 0:等待成交 1:部分成交 2:完全成交
+type	String	订单类型：1:开多 2:开空 3:平多 4:平空 5:减仓平多 6:减仓平空 7:协议平多 8:协议平空 9:爆仓平多 10:爆仓平空
+order_type	String	订单类型：0：普通委托 1：只做Maker（Post only） 2：全部成交或立即取消（FOK） 3：立即成交并取消剩余（IOC）
+totalProfits	String	总盈亏
+triggerPrice	String	触发价格
+triggerPriceType	String	触发价格类型
+triggerTime	String	触发时间
+Unix毫秒时间戳
+presetTakeProfitPrice	String	预设的止盈价格
+presetStopLossPrice	String	预设的止损价格
+返回示例
+
+{
+	"list": [{
+		"symbol": "cmt_btcusdt",
+		"size": "1",
+		"client_oid": "1234567890",
+		"createTime": "1742213506548",
+		"filled_qty": "0.5",
+		"fee": "0.01",
+		"order_id": "461234125",
+		"price": "50000.00",
+		"price_avg": "49900.00",
+		"status": "1",
+		"type": "1",
+		"order_type": "0",
+		"totalProfits": "200.00",
+		"triggerPrice": "48000.00",
+		"triggerPriceType": "",
+		"triggerTime": "1742213506548",
+        "presetTakeProfitPrice": "",
+        "presetStopLossPrice": ""
+	}],
+	"nextPage": false
+}

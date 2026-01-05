@@ -1,0 +1,74 @@
+查询成交明细
+GET /capi/v2/order/fills
+权重(IP): 5, 权重(UID): 5
+
+请求参数
+
+参数名	类型	是否必填	说明
+symbol	String	否	交易对
+orderId	Long	否	订单号
+startTime	Long	否	开始时间戳
+Unix毫秒时间戳
+endTime	Long	否	结束时间戳
+Unix毫秒时间戳
+limit	Long	否	查询条数 最大100，默认100
+请求示例
+
+curl "https://api-contract.weex.com/capi/v2/order/fills?symbol=cmt_bchusdt&orderId=596471064624628269" \
+   -H "ACCESS-KEY:*******" \
+   -H "ACCESS-SIGN:*******" \
+   -H "ACCESS-PASSPHRASE:*****" \
+   -H "ACCESS-TIMESTAMP:1659076670000" \
+   -H "locale:zh-CN" \
+   -H "Content-Type: application/json"
+
+
+返回参数
+
+参数名	类型	说明
+list	List	成交明细集合
+>tradeId	Integer	成交id
+>orderId	Integer	所属委托单id
+>symbol	String	交易对
+>marginMode	String	保证金模式
+>separatedMode	String	分仓模式
+>positionSide	String	仓位方向
+>orderSide	String	买卖方向
+>fillSize	String	实际成交数量
+>fillValue	String	实际成交价值
+>fillFee	String	实际成交费用
+>liquidateFee	String	平仓费用
+>realizePnl	String	实际已实现盈亏
+>direction	String	实际成交方向
+>liquidateType	String	清算委托单类型
+>legacyOrdeDirection	String	兼容之前的委托单方向类型
+>createdTime	Integer	时间戳
+Unix毫秒时间戳
+nextFlag	Boolean	是否还有下一页
+totals	Integer	总条数
+返回示例
+
+{
+  "list": [
+    {
+      "tradeId": 0,
+      "orderId": 0,
+      "symbol": "cmt_btcusdt",
+      "marginMode": "SHARED",
+      "separatedMode": "SEPARATED",
+      "positionSide": "LONG",
+      "orderSide": "BUY",
+      "fillSize": "67",
+      "fillValue": "12",
+      "fillFee": "67",
+      "liquidateFee": "MAKER",
+      "realizePnl": "83",
+      "direction": "OPEN_LONG",
+      "liquidateType": "FORCE_LIQUIDATE",
+      "legacyOrdeDirection": "OPEN_LONG",
+      "createdTime": 1716712170527
+    }
+  ],
+  "nextFlag": false,
+  "totals": 0
+}

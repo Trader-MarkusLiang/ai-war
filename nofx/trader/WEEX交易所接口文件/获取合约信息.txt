@@ -1,0 +1,66 @@
+获取合约信息
+GET /capi/v2/market/contracts
+权重(IP): 10
+
+请求参数
+
+参数名	类型	是否必填	说明
+symbol	String	否	交易对
+请求示例
+
+curl "https://api-contract.weex.com/capi/v2/market/contracts?symbol=cmt_btcusdt"
+
+
+返回参数
+
+参数名	类型	说明
+symbol	String	交易对
+underlying_index	String	合约币种
+quote_currency	String	计价货币
+coin	String	保证金币种
+contract_val	String	合约面值
+delivery	Array	结算时间
+size_increment	String	数量精度
+tick_size	String	价格精度
+forwardContractFlag	Boolean	是否是U本位（USD-M） 合约
+priceEndStep	BigDecimal	价格最后一位步长
+minLeverage	Integer	最小杠杆倍数1
+maxLeverage	Integer	最大杠杆倍数100
+buyLimitPriceRatio	String	买价限价比例
+sellLimitPriceRatio	String	卖价限价比例
+makerFeeRate	String	maker手续费率
+takerFeeRate	String	taker手续费率
+minOrderSize	String	最小委托单数量(基础币)
+maxOrderSize	String	最大委托单数量(基础币)
+maxPositionSize	String	最大仓位数量(基础币)
+marketOpenLimitSize	String	市价开仓单次限制数量(基础币)
+返回示例
+
+[
+  {
+    "symbol": "cmt_btcusdt",
+    "underlying_index": "BTC",
+    "quote_currency": "USDT",
+    "coin": "USDT",
+    "contract_val": "0",
+    "delivery": [
+      "00:00:00",
+      "08:00:00",
+      "16:00:00"
+    ],
+    "size_increment": "5",
+    "tick_size": "1",
+    "forwardContractFlag": true,
+    "priceEndStep": 1,
+    "minLeverage": 1,
+    "maxLeverage": 500,
+    "buyLimitPriceRatio": "0.015",
+    "sellLimitPriceRatio": "0.015",
+    "makerFeeRate": "0.0002",
+    "takerFeeRate": "0.0006",
+    "minOrderSize": "0.0001",
+    "maxOrderSize": "100000",
+    "maxPositionSize": "1000000",
+    "marketOpenLimitSize": "12000"
+  }
+]

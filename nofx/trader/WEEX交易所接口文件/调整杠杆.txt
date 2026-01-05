@@ -1,0 +1,40 @@
+调整杠杆
+POST /capi/v2/account/leverage
+权重(IP): 10, 权重(UID): 20
+
+请求参数
+
+参数名	类型	是否必填	说明
+symbol	String	是	币对名
+marginMode	Integer	是	保证金模式
+1: 全仓模式
+3: 逐仓模式
+必须设置为账户当前使用的模式
+longLeverage	String	是	多仓杠杆倍数,在全仓模式下，必须与shortLeverage保持一致
+shortLeverage	String	是	空仓杠杆倍数,在全仓模式下，必须与longLeverage保持一致
+请求示例
+
+curl -X POST "https://api-contract.weex.com/capi/v2/account/leverage" \
+   -H "ACCESS-KEY:*******" \
+   -H "ACCESS-SIGN:*" \
+   -H "ACCESS-PASSPHRASE:*" \
+   -H "ACCESS-TIMESTAMP:1659076670000" \
+   -H "locale:zh-CN" \
+   -H "Content-Type: application/json" \
+   -d '{"symbol":"cmt_bchusdt","marginMode":1,"longLeverage":"2"}'
+
+
+返回参数
+
+参数名	类型	说明
+msg	string	返回信息
+requestTime	string	时间戳
+Unix 毫秒时间戳
+code	string	返回码
+返回示例
+
+{
+    "msg": "success",
+    "requestTime": 1713339011237,
+    "code": "200"
+}
